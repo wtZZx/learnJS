@@ -207,3 +207,51 @@ fishA.showleg();
 fishA.swimming();
 
 // fishA 的原型指向了 fish , fish 的原型指向了 animal
+
+
+function Person(name, age, sex){
+	this.name = name;
+	this.age = age;
+	this.sex = sex;
+}
+
+Person.prototype.HEAD = 1;
+Person.prototype.LEG = 2;
+
+Person.prototype.sleep = function(){
+	console.log(this.name + " is sleeping");
+}
+
+Person.prototype.eat = function(){
+	console.log(this.name + " is eatting");
+}
+
+function Student(name, age, sex, grade, major){
+	Person.call(this, name, age, sex);
+	this.grade = grade;
+	this.major = major;
+}
+
+Student.prototype = Object.create(Person.prototype);  // 原型式继承
+Student.constructor = Student;
+
+Student.prototype.HEAD = 3;
+
+Student.prototype.learing = function(){
+	console.log(this.name + " is learing " + this.major);
+}
+
+Student.prototype.homeWork = function(){
+	console.log(this.name + " is doing " + this.major + " homeWork");
+}
+
+
+var zhangsan = new Student("zhangsan", 18, "man", "grade1", "computer");
+var zhangsansFarther = new Person("zhanger", 40, "man");
+
+zhangsan.sleep();
+zhangsan.learing();
+console.log(zhangsan.grade);
+console.log(zhangsan.HEAD);
+console.log(zhangsansFarther.HEAD);
+zhangsan.homeWork();
