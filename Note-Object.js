@@ -90,4 +90,120 @@ delete xiaoming.job;
 console.log(xiaoming.job);      // student  -- 来自原型
 
 
- 
+ // - 11-9
+function Person(){
+	
+}
+var friend = new Person();
+
+Person.prototype = {
+	constructor: Person,
+	name: "jack",
+	age: 10,
+	job: "student",
+	sayName: function(){
+		console.log(this.name);
+	}
+};
+
+//friend.sayName(); // Uncaught TypeError: friend.sayName is not a function
+
+/**
+ *   包含引用类型的原型对象问题
+ */
+
+function Person(){
+	
+}
+Person.prototype = {
+	constructor: Person,
+	name: "jack",
+	age: 15,
+	job: "student",
+	friends: ["tom", "mike"],
+	sayName: function(){
+		console.log(this.name);
+	}
+};
+
+var person1 = new Person();
+var Person2 = new Person();
+
+person1.friends.push("Bob");
+
+console.log(person1.friends);   // ["tom", "mike", "Bob"]
+console.log(Person2.friends);   // ["tom", "mike", "Bob"]
+
+// 本应该只在 Person1 中显示的 Bob 在 Person2 中也显示了出来
+
+/**
+ *  结合使用构造函数及原型模式
+ *  构造函数定义实例化的属性
+ *  原型定义共享的属性
+ *  eg. 6.2.4
+ */
+
+function Students(name, age, sex){
+	this.name = name;
+	this.age = age;
+	this.sex = sex;
+	this.home = ["liyang"];
+}
+
+Students.prototype = {
+	constructor: Students,
+	grade: "Grade1",
+	leader: "Mr.wang",
+}
+
+var xiaoming = new Students("xiaoming", 18, "boy");
+var lisi = new Students("lisi", 16, "girl");
+xiaoming.home.push("changzhou");
+lisi.home.push("zhengjiang");
+
+console.log(xiaoming.home);   // ["liyang", "changzhou"]
+console.log(lisi.home);       // ["liyang", "zhengjiang"]
+
+// xiaoming 和 lisi 分别引用了不同的数组 所以互不影响
+
+/**
+ *  继承：
+ *  ECMAScript中无法实现接口继承，ECMAScript只支持实现继承，其实现继承的主要是依靠原型键实现的
+ */
+
+function animal(name, leg, anType){
+	this.name = name;
+	this.leg = leg;
+	this.anType = anType;
+}
+
+animal.prototype = {
+	showleg: function(){
+		console.log(this.name + " has " + this.leg + " legs");
+	},
+	showType: function(){
+		console.log(this.name + " is " + this.anType);
+	}
+}
+
+function fish(name, leg){
+	 animal.call(this, name, leg, "fish");
+	 this.name = name;
+}
+
+fish.prototype = Object.create(animal.prototype);
+// 通过创建一个空对象来取得 anmial 的原型
+fish.prototype.constructor = fish;
+
+
+fish.prototype.swimming = function(){
+	console.log(this.name + " can swimming!");
+};
+
+
+var fishA = new fish("aili", 0);
+fishA.showType();
+fishA.showleg();
+fishA.swimming();
+
+// fishA 的原型指向了 fish , fish 的原型指向了 animal
