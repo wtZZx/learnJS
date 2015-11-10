@@ -133,3 +133,32 @@ function output(item, index) {
 }
 each(arr, output);  // 0:java, 1:c, 2:php, 3:html
 
+
+// 获取一个对象里面第一层元素的数量，返回一个整数
+function getObjectLength(obj) {
+    var length = 0;
+    for(var i in obj){
+        length++;
+    }
+    return length;
+}
+
+/**
+ *  ECMAScript5 提供了 Object.keys() 方法，接收一个对象做为参数，返回一个包含所有可枚举属性的字符串数组
+ */
+
+function getObjcetLength(obj){
+    return Object.keys(obj).length;
+}
+
+// 使用示例
+var obj = {
+    a: 1,
+    b: 2,
+    c: {
+        c1: 3,
+        c2: 4
+    }
+};
+console.log(getObjectLength(obj)); // 3
+
