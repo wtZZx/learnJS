@@ -109,3 +109,27 @@ console.log(abObj.b.b1[0]);
 
 console.log(tarObj.a);      // 1
 console.log(tarObj.b.b1[0]);    // "hello"
+
+// 实现一个遍历数组的方法，针对数组中每一个元素执行fn函数，并将数组索引和元素作为参数传递
+function each(arr, fn) {
+    for(var i=0; i<arr.length; i++){
+        fn.call(this, arr[i], i);  // call() 在特定的作用域中调用函数
+    }
+}
+
+// 其中fn函数可以接受两个参数：item和index
+
+// 使用示例
+var arr = ['java', 'c', 'php', 'html'];
+function output(item) {
+    console.log(item)
+}
+each(arr, output);  // java, c, php, html
+
+// 使用示例
+var arr = ['java', 'c', 'php', 'html'];
+function output(item, index) {
+    console.log(index + ': ' + item)
+}
+each(arr, output);  // 0:java, 1:c, 2:php, 3:html
+
