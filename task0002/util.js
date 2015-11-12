@@ -192,4 +192,33 @@ window.onload = function(){
 		return element.parentNode === siblingNode.parentNode;
 	}
 	
+	// 为element增加一个样式名为newClassName的新样式
+	
+	/**
+	*   存在的情况 1.element 本身没有 class 直接添加
+	*              2.element 本身就存在 class 添加新 class
+	*/
+	
+	function addClass(element, newClassName) {
+		var oldClass = element.getAttribute("class");
+		if(oldClass === null){
+		// 判断是否存在旧样式
+			element.className = newClassName;
+		}else{
+			element.className = (oldClass + " " + newClassName);
+		}
+    }
+	
+	// 移除element中的样式oldClassName
+	
+	function removeClass(element, oldClassName){
+		var classNames = element.getAttribute("class");
+		var patt = new RegExp("\\b" + oldClassName + "\\b");
+		// 创建一个包含 oldClassName 的正则对象
+		classNames = classNames.replace(patt, "");
+		classNames = trim(classNames); 
+		// 清除一下首尾空格
+		element.setAttribute("class", classNames);
+    }
+	
 }
