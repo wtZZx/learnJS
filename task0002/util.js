@@ -219,6 +219,25 @@ window.onload = function(){
 		classNames = trim(classNames); 
 		// 清除一下首尾空格
 		element.setAttribute("class", classNames);
+		
+		
+		// element.classList.remove(oldClassName); // IE10+
     }
 	
+	
+	function getPosition(element){
+		var Position = new Object;
+		Position.x = element.getBoundingClientRect().left + Math.max(document.documentElement.scrollLeft, document.body.scrollLeft);
+		Position.y = element.getBoundingClientRect().top + Math.max(document.documentElement.scrollTop, document.body.scrollTop);
+		return Position;
+	}
+	
+	// IE - > documentElement Chrome -> body
+	/**
+	 *  参考：
+	 *  《javacript高级程度设计》 P323
+	 *  http://www.cnblogs.com/qieqing/archive/2008/10/06/1304399.html
+	 *  http://www.cnblogs.com/zhenyu-whu/archive/2012/11/13/2768004.html
+	 *  http://gaohaoyang.github.io/2015/04/22/baidu-ife-2-javascript/
+	 */
 }
