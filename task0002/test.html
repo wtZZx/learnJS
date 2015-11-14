@@ -3,7 +3,39 @@
 	<head>
 	    <meta charset="UTF-8">
 	    <script src="util.js"></script>
-		
+		<style>
+		*{
+				margin: 0;
+				padding: 0;
+			}
+			
+			#div{
+				width: 500px;
+				height: 500px;
+				background: #3cc;
+				position: absolute;
+				left: 50px;
+				top: 50px;
+			}
+			
+			#wrap{
+				width: 600px;
+				height: 600px;
+				background: red;
+				left: 50px;
+				top: 50px;
+				position: absolute;
+			}
+			
+			#wrapB{
+				width: 700px;
+				height: 700px;
+				background: blue;
+				margin-top: 50px;
+				margin-left: 50px;
+				position: relative;
+			}
+		</style>
 	</head>
 	<body>
 		<div id="test">
@@ -11,6 +43,12 @@
 				
 			</ul>
 			<p>a p</p>
+		</div>
+		
+		<div id="wrapB">
+			<div id="wrap">
+				<div id="div">123</div>
+			</div>
 		</div>
 	</body>
 </html>
