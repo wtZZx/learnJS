@@ -240,4 +240,28 @@ window.onload = function(){
 	 *  http://www.cnblogs.com/zhenyu-whu/archive/2012/11/13/2768004.html
 	 *  http://gaohaoyang.github.io/2015/04/22/baidu-ife-2-javascript/
 	 */
+	 
+	 // 实现对click事件的绑定
+	function addClickEvent(element, listener) {
+		element.addEventListener("click", listener, false);
+	}
+
+    /**
+	 *  keydown 按下任意键 如不放开 重复
+	 *  keypress 按下字符键 如不放开 重复
+	 *  keyup 释放按键
+	 */
+	
+	// 实现对于按Enter键时的事件绑定
+	function addEnterEvent(element, listener) {
+		element.addEventListener("keydown", function(event){
+			if(event.keyCode == 13){
+				listener;
+			}
+		}, false);
+	}
+	
+	var textBox = document.querySelector("#test");
+	
+	
 }
